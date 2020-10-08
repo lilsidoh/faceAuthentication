@@ -107,7 +107,12 @@ section #main-content
 #guts p
 {
 }
-
+.hidden
+{
+	width: 450px;
+	height: 350px;
+	margin-top: 9%;
+}
 .about-section
 {
 	background-image: url(../images/background1.png);

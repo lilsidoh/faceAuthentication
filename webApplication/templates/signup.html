@@ -14,7 +14,9 @@
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.4/jquery.min.js'></script>
     <script type='text/javascript' src='js/jquery.ba-hashchange.min.js'></script>
     <script type='text/javascript' src='js/dynamicpage.js'></script>
-</head>
+    <script type='text/javascript' src='./static/js/image.js' onload="opencvIsReady()"></script>
+        
+ </head>
 
 <body>
 
@@ -33,8 +35,8 @@
 	<div id="guts">
 		<div class="about-section">
 			<div class='image-2'>
-				<img  src="./static/images/image-3.jpeg" alt="image" width='460px' height='330px' style="padding-top: 40px;">
-				</div>
+				<video id="player" class="hidden" controls></video>
+    				<canvas class="center-block" id="canvasOutput" width=320 height=240></canvas>				</div>
 
 			</div>
 			<div class="section-paragraph" align='left'>

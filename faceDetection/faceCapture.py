@@ -6,11 +6,12 @@ video = cv2.VideoCapture(0);
 
 count = 0
 directory = "imageTest"
-os.mkdir(directory)
+
+#os.mkdir(directory)
 path = "/root/projects/projectFelix/faceAuthentication/"
 
 fullPath = os.path.join(path, directory)
-os.chdir(fullPath)
+os.chdir(directory)
 while True:
     check, frame = video.read();
     faces = face_cascade.detectMultiScale(frame,
@@ -21,7 +22,7 @@ while True:
     cv2.imshow('Face Detector', frame);
 
     key = cv2.waitKey(1);
-
+    
     if key == ord('q'):
         imageName = "Image{}.jpg".format(count)
         cv2.imwrite(imageName, roiColor)
