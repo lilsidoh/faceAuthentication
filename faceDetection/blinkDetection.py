@@ -29,6 +29,7 @@ TOTAL = 0
 print('[INFO] Loading facial landmark predictor...')
 detector = dlib.get_frontal_face_detector()
 predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml');
 
 (lStart, lEnd) = face_utils.FACIAL_LANDMARKS_IDXS['left_eye']
 (rStart, rEnd) = face_utils.FACIAL_LANDMARKS_IDXS['right_eye']
@@ -79,12 +80,22 @@ while True:
 
         cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
         cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
+        faces = predictor.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5);
+        for x, y, w, h in faces:
+            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3);
+            roiColor = frame[y:y + h, x:x + w]
 
     cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1) & 0xFF
-
-    if key == ord("q"):
+    if TOTAL == 3:
+        key = cv2.waitKey(3000) & 0xFF
+        imageName = "client"
+        cv2.imwrite(imageName, roiColor)
         break
+
+    
+
+    #if key == ord("q"):
+    #break
 
 
 cv2.destroyAllWindows()
