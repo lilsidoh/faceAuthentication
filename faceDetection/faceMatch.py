@@ -36,7 +36,7 @@ def imagesNames():
         names = []
         for encoding in encodings:
             matches = face_recognition.compare_faces(data["encodings"], encoding, tolerance=0.45)
-            print matches
+            print( matches)
             name = "uknown"
             
             if True in matches:
@@ -47,7 +47,7 @@ def imagesNames():
                     counts[name] = counts.get(name, 0) + 1
                     name = max(counts, key=counts.get)
             else:
-                print"No matches"
+                print("No matches")
                     
             return name
 
@@ -65,10 +65,10 @@ def imagesNames():
             predicted.append(matchedPerson)
             
         else:
-            print"No image found"
+            print("No image found")
 
     for predict in predicted:
-        print predict
+        print (predict)
 
 def main():
     imagesNames()

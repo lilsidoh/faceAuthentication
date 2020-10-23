@@ -3,12 +3,15 @@ from imutils.video import FileVideoStream
 from imutils.video import VideoStream
 from imutils import face_utils
 import time
+import os
 import argparse
 import numpy as np
 import imutils
 import cv2
 import dlib
 import face_recognition
+
+from captureFace import faceAuthentication
 
 
 def eye_aspect_ratio(eye):
@@ -43,6 +46,8 @@ faceLocation = []
 
 time.sleep(1.0)
 
+userName = input("[INFO] Enter Username:  ")
+directory = "imageTest"
 
 while True:
         
@@ -79,24 +84,35 @@ while True:
             COUNTER = 0 
 
         cv2.putText(frame, "Blinks: {}".format(TOTAL), (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)
-        faces = predictor.detectMultiScale(frame, scaleFactor=1.1, minNeighbors=5);
-        for x, y, w, h in faces:
-            cv2.rectangle(frame, (x, y), (x+w, y+h), (0, 255, 0), 3);
-            roiColor = frame[y:y + h, x:x + w]
+        cv2.putText(frame, "EAR: {:.2f}".format(ear), (300, 30), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 255), 2)  
+        
+        path = "/root/projects/projectFelix/faceAuthentication/faceDetection"
+        def changeDir():
+            
+            #creating directory to save the image of users who login 
+            fullPath = os.path.join(path, directory)
+            #check if the fullPath directory exist
+            if os.path.isdir(fullPath):
+                os.chdir(fullPath)
+            #create a directory it doesnt exits
+            else:
+                os.mkdir(fullPath)
+                os.chirdir(fullPath)
+
+        changeDir()
+
+        imageName = "{}.jpg".format(userName)
+        cv2.imwrite(imageName, frame)
+
 
     cv2.imshow("Frame", frame)
-    if TOTAL == 3:
-        key = cv2.waitKey(3000) & 0xFF
-        imageName = "client"
-        cv2.imwrite(imageName, roiColor)
-        break
-
+    key = cv2.waitKey(1) & 0xff
     
+    if TOTAL == 3:
 
-    #if key == ord("q"):
-    #break
+        break
 
 
 cv2.destroyAllWindows()
 vs.stop()
+
