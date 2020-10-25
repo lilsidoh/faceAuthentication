@@ -36,7 +36,7 @@ def imagesNames():
         names = []
         for encoding in encodings:
             matches = face_recognition.compare_faces(data["encodings"], encoding, tolerance=0.45)
-            print( matches)
+            #print( matches)
             name = "uknown"
             
             if True in matches:
@@ -51,7 +51,7 @@ def imagesNames():
                     
             return name
 
-    testFolder = "./imageTest"
+    testFolder = './imageTest'
     #actual = []
     predicted = []
     startTime = time.time()
@@ -68,11 +68,10 @@ def imagesNames():
             print("No image found")
 
     for predict in predicted:
-        print (predict)
+        print ('[INFO] Authenticating {}'.format(predict))
 
-def main():
+imagesNames()
+
+'''if __name__ == '__main__':
     imagesNames()
-
-if __name__ == '__main__':
-    main()
-
+'''

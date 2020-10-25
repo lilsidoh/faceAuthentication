@@ -97,7 +97,7 @@ while True:
             #create a directory it doesnt exits
             else:
                 os.mkdir(fullPath)
-                os.chirdir(fullPath)
+                os.chdir(fullPath)
 
         changeDir()
 

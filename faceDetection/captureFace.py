@@ -28,7 +28,7 @@ class faceAuthentication():
         count = 0
         video = cv2.VideoCapture(0);
         while True:
-            check, frame = video.read();
+        check, frame = video.read();
             faces = self.face_cascade.detectMultiScale(frame,scaleFactor=1.1, minNeighbors=5);
             for x,y,w,h in faces:
                 cv2.rectangle(frame, (x,y), (x+w,y+h), (0,255,0), 1);
@@ -37,7 +37,7 @@ class faceAuthentication():
 
             key = cv2.waitKey(1000);
             self.changeDir(directory)
-            imageName = "img{}.jpg".format(userName)
+            imageName = "{}.jpg".format(userName)
             cv2.imwrite(imageName, roiColor)
             os.chdir(self.path)
             break
