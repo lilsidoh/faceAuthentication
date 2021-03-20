@@ -44,7 +44,7 @@ imutils==0.5.3
 IPy==1.0
 ipython-genutils==0.2.0
 itsdangerous==1.1.0
-Jinja2==2.11.2
+Jinja2==2.11.3
 jsonschema==2.6.0
 jupyter-core==4.6.3
 kaitaistruct==0.8
